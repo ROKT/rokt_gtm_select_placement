@@ -15,5 +15,5 @@
 homepage: 'https://www.rokt.com'
 documentation: 'https://docs.rokt.com/docs/developers/integration-guides/third-party-integrations/google-tag-manager/google-tag-template'
 versions:
-  - sha: 
+  - sha: ca9adc97ac13e93820083e33df70d042d3205d26
     changeNotes: Initial Release
