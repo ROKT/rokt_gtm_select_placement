@@ -1,4 +1,4 @@
-# Google Tag Template - Initialization
+# Google Tag Template - Select Placement
 
 ## Resident Experts
 
