@@ -280,12 +280,6 @@ ___TEMPLATE_PARAMETERS___
         "simpleValueType": true
       },
       {
-        "type": "CHECKBOX",
-        "name": "roktEmailPositiveEngagement",
-        "checkboxText": "Send raw email only on positive engagement",
-        "simpleValueType": true
-      },
-      {
         "type": "TEXT",
         "name": "pageIdentifier",
         "displayName": "Page Identifier",
