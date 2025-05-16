@@ -280,12 +280,6 @@ ___TEMPLATE_PARAMETERS___
         "simpleValueType": true
       },
       {
-        "type": "CHECKBOX",
-        "name": "roktEmailPositiveEngagement",
-        "checkboxText": "Send raw email only on positive engagement",
-        "simpleValueType": true
-      },
-      {
         "type": "TEXT",
         "name": "pageIdentifier",
         "displayName": "Page Identifier",
@@ -359,13 +353,16 @@ ___SANDBOXED_JS_FOR_WEB_TEMPLATE___
 // Enter your template code here.
 const log = require('logToConsole');
 const callInWindow = require('callInWindow'); 
-// const callLater = require('callLater');
+const injectScript = require('injectScript');
+const setInWindow = require('setInWindow');
 const Object = require('Object');
 log('data =', data);
 
 // Initialize Config
 const cfg = {};
 cfg.attributes = {};
+cfg.hashRawEmail = data.hashRawEmail;
+cfg.eventListeners = data.eventListeners;
 
 // 1 - Add core attributes
 for (const keyPair of Object.entries(data)) {
@@ -411,13 +408,14 @@ if (data.pageIdentifier) {
   cfg.identifier = data.pageIdentifier;
 }
 
-// Call selectPlacements
-callInWindow('mParticle.ready', function() {
-  callInWindow('mParticle.Rokt.selectPlacements', cfg);
-}); 
+setInWindow('rokt_config', cfg, true);
 
-// Call data.gtmOnSuccess when the tag is finished.
-data.gtmOnSuccess();
+// 4 Load Wrapper Script
+injectScript(
+  'https://apps.rokt.com/store/js/gtm_wrapper_v2.min.js',
+  data.gtmOnSuccess,
+  data.gtmOnFailure
+);
 
 
 ___WEB_PERMISSIONS___
@@ -479,7 +477,7 @@ ___WEB_PERMISSIONS___
                 "mapValue": [
                   {
                     "type": 1,
-                    "string": "mParticle.Rokt.selectPlacements"
+                    "string": "rokt_config"
                   },
                   {
                     "type": 8,
@@ -494,84 +492,36 @@ ___WEB_PERMISSIONS___
                     "boolean": true
                   }
                 ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "clientAnnotations": {
+      "isEditedByUser": true
+    },
+    "isRequired": true
+  },
+  {
+    "instance": {
+      "key": {
+        "publicId": "inject_script",
+        "versionId": "1"
+      },
+      "param": [
+        {
+          "key": "urls",
+          "value": {
+            "type": 2,
+            "listItem": [
+              {
+                "type": 1,
+                "string": "https://*.rokt-api.com/*"
               },
               {
-                "type": 3,
-                "mapKey": [
-                  {
-                    "type": 1,
-                    "string": "key"
-                  },
-                  {
-                    "type": 1,
-                    "string": "read"
-                  },
-                  {
-                    "type": 1,
-                    "string": "write"
-                  },
-                  {
-                    "type": 1,
-                    "string": "execute"
-                  }
-                ],
-                "mapValue": [
-                  {
-                    "type": 1,
-                    "string": "mParticle.ready"
-                  },
-                  {
-                    "type": 8,
-                    "boolean": true
-                  },
-                  {
-                    "type": 8,
-                    "boolean": false
-                  },
-                  {
-                    "type": 8,
-                    "boolean": true
-                  }
-                ]
-              },
-              {
-                "type": 3,
-                "mapKey": [
-                  {
-                    "type": 1,
-                    "string": "key"
-                  },
-                  {
-                    "type": 1,
-                    "string": "read"
-                  },
-                  {
-                    "type": 1,
-                    "string": "write"
-                  },
-                  {
-                    "type": 1,
-                    "string": "execute"
-                  }
-                ],
-                "mapValue": [
-                  {
-                    "type": 1,
-                    "string": "mParticle.Rokt.hashAttributes"
-                  },
-                  {
-                    "type": 8,
-                    "boolean": true
-                  },
-                  {
-                    "type": 8,
-                    "boolean": true
-                  },
-                  {
-                    "type": 8,
-                    "boolean": true
-                  }
-                ]
+                "type": 1,
+                "string": "https://*.rokt.com/*"
               }
             ]
           }
