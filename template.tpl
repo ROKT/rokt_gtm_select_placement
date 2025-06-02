@@ -293,20 +293,6 @@ ___TEMPLATE_PARAMETERS___
         "simpleValueType": true
       },
       {
-        "type": "TEXT",
-        "name": "noFunctional",
-        "displayName": "Disallow Functional Cookies",
-        "simpleValueType": true,
-        "help": "Should dynamically reflect your user\u0027s functional cookie consent state. Accepts a true or false Boolean."
-      },
-      {
-        "type": "TEXT",
-        "name": "noTargeting",
-        "displayName": "Disallow Targeting Cookies",
-        "simpleValueType": true,
-        "help": "Should dynamically reflect your user\u0027s targeting cookie consent state. Accepts a true or false Boolean."
-      },
-      {
         "type": "SIMPLE_TABLE",
         "name": "eventListeners",
         "displayName": "Event Listeners",
