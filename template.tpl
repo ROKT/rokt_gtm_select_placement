@@ -245,7 +245,7 @@ ___TEMPLATE_PARAMETERS___
             "macrosInSelect": false,
             "selectItems": [
               {
-                "value": "navigation",
+                "value": 1,
                 "displayValue": "Navigation"
               },
               {
@@ -626,8 +626,8 @@ const buildCustomFlags = () => {
     const value = row.value;
     if (!hasValue(key) || !hasValue(value)) return;
 
-    const normalizedKey = toStringValue(key);
-    if (!normalizedKey.trim()) return;
+    const normalizedKey = toStringValue(key).trim();
+    if (!normalizedKey) return;
     flags[normalizedKey] = toStringValue(value);
   });
 
