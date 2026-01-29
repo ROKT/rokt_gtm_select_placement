@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-homepage: 'https://www.rokt.com'
-documentation: 'https://docs.rokt.com/docs/developers/integration-guides/third-party-integrations/google-tag-manager/google-tag-template'
+homepage: https://www.rokt.com
+documentation: https://docs.rokt.com/developers/integration-guides/getting-started/ecommerce/tag-managers/google-tag-manager
 versions:
   - sha: 25c8cd304f19f072643040dcaa2bd6b671f378b9
     changeNotes: Updated configuration settings

@@ -1,4 +1,4 @@
-# Google Tag Template - Select Placement
+# Google Tag Template - Events
 
 ## Resident Experts
 
@@ -11,11 +11,11 @@ Rokt integrates with Google Tag Manager, enabling partners to set attributes and
 Partners can configure their tags on [Google's Console](https://tagmanager.google.com/gallery/#/?page=1) instead of managing the Rokt script directly.
 
 ### Steps to enable:
-1. Select the Initialization Tag Template from the [Google Community Template Gallery](https://tagmanager.google.com/gallery/#/?page=1) or import this .tpl file into your GTM workspace.
+1. Select the mParticle by Rokt - Events Tag Template from the [Google Community Template Gallery](https://tagmanager.google.com/gallery/#/?page=1) or import this .tpl file into your GTM workspace.
 2. Configure your tag with the proper API Key and desired settings. 
 3. Configure the trigger to load the SDK as the page is loaded. 
 4. Deploy the tag. 
-5. Verify and QA, you should see window.mParticle loaded on your webpage.
+5. Verify and QA, if you have initialized mParticle, you should be able to identify, log events, and render Rokt placements.
 
 This is a public repository containing the TPL file necessary for Google to support Rokt's application onto the Tag Manager Marketplace.
 
