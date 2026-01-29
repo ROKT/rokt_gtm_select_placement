@@ -15,6 +15,8 @@
 homepage: https://www.rokt.com
 documentation: https://docs.rokt.com/developers/integration-guides/getting-started/ecommerce/tag-managers/google-tag-manager
 versions:
+  - sha: 7e4f6b0101d9db9c4671fb7232cdbcb8bb69b685
+    changeNotes: Updated configuration for Rokt Events
   - sha: 25c8cd304f19f072643040dcaa2bd6b671f378b9
     changeNotes: Updated configuration settings
   - sha: 994223308b76033aad44c48369ba5a128b93b7ce
