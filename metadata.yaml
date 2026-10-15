@@ -15,6 +15,8 @@
 homepage: https://www.rokt.com
 documentation: https://docs.rokt.com/developers/integration-guides/getting-started/ecommerce/tag-managers/google-tag-manager
 versions:
+  - sha: afa5250dac17df5b8d3ae94ff188484a06aace47
+    changeNotes: Log Event always sends "conversion" with event type Transaction; Event Name and Event Type fields removed
   - sha: 7e4f6b0101d9db9c4671fb7232cdbcb8bb69b685
     changeNotes: Updated configuration for Rokt Events
   - sha: 25c8cd304f19f072643040dcaa2bd6b671f378b9
@@ -23,3 +25,4 @@ versions:
     changeNotes: Updated configuration settings
   - sha: ca9adc97ac13e93820083e33df70d042d3205d26
     changeNotes: Initial Release
+
