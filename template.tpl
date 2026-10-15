@@ -227,59 +227,6 @@ ___TEMPLATE_PARAMETERS___
         "groupStyle": "NO_ZIPPY",
         "subParams": [
           {
-            "type": "TEXT",
-            "name": "eventname",
-            "displayName": "Event Name",
-            "simpleValueType": true,
-            "notSetText": "",
-            "valueValidators": [
-              {
-                "type": "NON_EMPTY"
-              }
-            ]
-          },
-          {
-            "type": "SELECT",
-            "name": "eventType",
-            "displayName": "Event Type",
-            "macrosInSelect": false,
-            "selectItems": [
-              {
-                "value": 1,
-                "displayValue": "Navigation"
-              },
-              {
-                "value": 2,
-                "displayValue": "Location"
-              },
-              {
-                "value": 3,
-                "displayValue": "Search"
-              },
-              {
-                "value": 4,
-                "displayValue": "Transaction"
-              },
-              {
-                "value": 5,
-                "displayValue": "UserContent"
-              },
-              {
-                "value": 6,
-                "displayValue": "UserPreference"
-              },
-              {
-                "value": 7,
-                "displayValue": "Social"
-              },
-              {
-                "value": 8,
-                "displayValue": "Other"
-              }
-            ],
-            "simpleValueType": true
-          },
-          {
             "type": "SIMPLE_TABLE",
             "name": "customFlags",
             "displayName": "Custom Flags",
@@ -747,13 +694,9 @@ const logEventConfig = {
   enabled: data.enableLogEvent === true,
 };
 
-if (hasValue(data.eventname)) {
-  logEventConfig.eventName = toStringValue(data.eventname);
-}
-
-if (data.eventType !== undefined && data.eventType !== null) {
-  logEventConfig.eventType = data.eventType;
-}
+// Rokt conversions are always logged as "conversion" with mParticle EventType.Transaction (4).
+logEventConfig.eventName = 'conversion';
+logEventConfig.eventType = 4;
 
 if (customFlags) {
   logEventConfig.customFlags = customFlags;
@@ -926,8 +869,6 @@ setup: |-
       hashRawEmail: false,
 
       enableLogEvent: false,
-      eventname: 'test_event',
-      eventType: 8,
       customFlags: [{ key: 'flag1', value: 'value1' }],
 
       enableSelectPlacements: false,
@@ -997,6 +938,24 @@ scenarios:
       assertThat(capturedSetInWindow.value.logEventConfig).isDefined();
       assertThat(capturedSetInWindow.value.selectPlacementsConfig).isDefined();
       assertThat(capturedSetInWindow.value.attributes).isDefined();
+
+  - name: "Log event is always a conversion of type Transaction"
+    code: |-
+      reset();
+      baseData.enableLogEvent = true;
+
+      mock('setInWindow', (key, value) => {
+        capturedSetInWindow = value;
+      });
+      mock('injectScript', (url, onSuccess, onFailure) => onSuccess());
+
+      runCode(baseData);
+
+      const logEventConfig = capturedSetInWindow.logEventConfig;
+      assertThat(logEventConfig.enabled).isTrue();
+      assertThat(logEventConfig.eventName).isEqualTo('conversion');
+      assertThat(logEventConfig.eventType).isEqualTo(4);
+      assertThat(logEventConfig.customFlags).isEqualTo({ flag1: 'value1' });
 
   - name: "Identity config includes identities when enabled"
     code: |-
